@@ -51,7 +51,7 @@ namespace CppCLRWinformsProjekt {
 				time_t now = time(0);
 				tm* ltm = localtime(&now);
 				now_minute = ltm->tm_min;
-				_sleep(60000);
+				_sleep(20000);
 			}
 			simpleSound->Play();
 			MessageBox::Show("Время вышло", "Внимание", MessageBoxButtons::OK, MessageBoxIcon::Information);
