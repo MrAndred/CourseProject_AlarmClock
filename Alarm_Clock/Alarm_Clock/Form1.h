@@ -41,13 +41,17 @@ namespace CppCLRWinformsProjekt {
 			tm* ltm = localtime(&now);
 			while (now_hours != hours)
 			{
+				time_t now = time(0);
+				tm* ltm = localtime(&now);
 				now_hours = ltm->tm_hour;
-				textBox3->Text = Convert::ToString(now_hours);
+				_sleep(60000);
 			}
 			while (now_minute != minutes)
 			{
+				time_t now = time(0);
+				tm* ltm = localtime(&now);
 				now_minute = ltm->tm_min;
-				textBox2->Text = Convert::ToString(now_minute);
+				_sleep(60000);
 			}
 			simpleSound->Play();
 			MessageBox::Show("Время вышло", "Внимание", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -82,11 +86,12 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox3;
+
+
 	private: System::Windows::Forms::Button^ button5;
-	private: System::Windows::Forms::TextBox^ textBox4;
-	private: System::Windows::Forms::TextBox^ textBox5;
+	private: System::Windows::Forms::TextBox^ textBox2;
+
+
 
 
 
@@ -118,11 +123,8 @@ namespace CppCLRWinformsProjekt {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// comboBox1
@@ -198,7 +200,7 @@ namespace CppCLRWinformsProjekt {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(77, 127);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(164, 13);
+			this->label1->Size = System::Drawing::Size(100, 13);
 			this->label1->TabIndex = 8;
 			this->label1->Text = L"Время для звонка";
 			// 
@@ -228,21 +230,7 @@ namespace CppCLRWinformsProjekt {
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(35, 13);
 			this->label3->TabIndex = 13;
-			this->label3->Text = L"Часы	";
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(118, 298);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(100, 20);
-			this->textBox2->TabIndex = 14;
-			// 
-			// textBox3
-			// 
-			this->textBox3->Location = System::Drawing::Point(12, 298);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(100, 20);
-			this->textBox3->TabIndex = 15;
+			this->label3->Text = L"Часы\t";
 			// 
 			// button5
 			// 
@@ -254,30 +242,21 @@ namespace CppCLRWinformsProjekt {
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
 			// 
-			// textBox4
+			// textBox2
 			// 
-			this->textBox4->Location = System::Drawing::Point(118, 272);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(100, 20);
-			this->textBox4->TabIndex = 18;
-			// 
-			// textBox5
-			// 
-			this->textBox5->Location = System::Drawing::Point(12, 272);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(100, 20);
-			this->textBox5->TabIndex = 17;
+			this->textBox2->Location = System::Drawing::Point(12, 298);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->ReadOnly = true;
+			this->textBox2->Size = System::Drawing::Size(281, 20);
+			this->textBox2->TabIndex = 19;
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(306, 330);
-			this->Controls->Add(this->textBox4);
-			this->Controls->Add(this->textBox5);
-			this->Controls->Add(this->button5);
-			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->button5);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->button4);
@@ -352,10 +331,9 @@ namespace CppCLRWinformsProjekt {
 		}
 
 		minutes = Convert::ToInt32(comboBox1->Text);
-		textBox4->Text = Convert::ToString(minutes);
 		hours = Convert::ToInt32(comboBox2->Text);
-		textBox5->Text = Convert::ToString(hours);
 
+		textBox2->Text = "Ваш будильник установлен на " + Convert::ToString(hours) + " часов и " + Convert::ToString(minutes) + " минут";
 		if ((minutes < 0 && minutes > 59) || (hours < 0 && hours > 23))
 		{
 			MessageBox::Show("Неверно указано время", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -367,7 +345,7 @@ namespace CppCLRWinformsProjekt {
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 		simpleSound->Stop();
-
+		play->Abort();
 	}
 	};
 }
