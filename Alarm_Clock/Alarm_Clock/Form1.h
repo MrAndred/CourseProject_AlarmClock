@@ -37,24 +37,13 @@ namespace CppCLRWinformsProjekt {
 		}
 
 		void CheckTime() {
-			time_t now = time(0);
-			tm* ltm = localtime(&now);
-			while (now_hours != hours)
+			if (melodyPath != nullptr)
 			{
-				time_t now = time(0);
-				tm* ltm = localtime(&now);
-				now_hours = ltm->tm_hour;
-				_sleep(60000);
+				simpleSound->Play();
 			}
-			while (now_minute != minutes)
-			{
-				time_t now = time(0);
-				tm* ltm = localtime(&now);
-				now_minute = ltm->tm_min;
-				_sleep(20000);
-			}
-			simpleSound->Play();
 			MessageBox::Show("Время вышло", "Внимание", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			system("rundll32 powrprof.dll,SetSuspendState 0,1,0");
+			
 		}
 	protected:
 		/// <summary>
@@ -90,6 +79,8 @@ namespace CppCLRWinformsProjekt {
 
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::Timer^ timer1;
+	private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -100,7 +91,7 @@ namespace CppCLRWinformsProjekt {
 		/// <summary>
 		/// Erforderliche Designervariable.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+
 
 
 #pragma region Windows Form Designer generated code
@@ -112,6 +103,7 @@ namespace CppCLRWinformsProjekt {
 
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -125,6 +117,7 @@ namespace CppCLRWinformsProjekt {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// comboBox1
@@ -250,6 +243,10 @@ namespace CppCLRWinformsProjekt {
 			this->textBox2->Size = System::Drawing::Size(281, 20);
 			this->textBox2->TabIndex = 19;
 			// 
+			// timer1
+			// 
+			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -339,13 +336,23 @@ namespace CppCLRWinformsProjekt {
 			MessageBox::Show("Неверно указано время", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			return;
 		}
-
-		play = gcnew Thread(gcnew ThreadStart(this, &Form1::CheckTime));
-		play->Start();
+		timer1->Start();
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 		simpleSound->Stop();
 		play->Abort();
 	}
-	};
+	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		time_t now = time(0);
+		tm* ltm = localtime(&now);
+		now_hours = ltm->tm_hour;
+		now_minute = ltm->tm_min;
+		if (now_hours == hours && now_minute == minutes)
+		{
+			play = gcnew Thread(gcnew ThreadStart(this, &Form1::CheckTime));
+			play->Start();
+			timer1->Enabled = false;
+		}
+	}
+};
 }
