@@ -1,6 +1,6 @@
 ﻿  CppCLR_WinformsProjekt.cpp
-D:\CourseProject_AlarmClock\Alarm_Clock\Alarm_Clock\Form1.h(23,1): warning C4102: start: неиспользованная метка
-D:\CourseProject_AlarmClock\Alarm_Clock\Alarm_Clock\Form1.h(34,4): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
-D:\CourseProject_AlarmClock\Alarm_Clock\Alarm_Clock\Form1.h(347,13): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\MrAndred\source\repos\CourseProject_AlarmClock\Alarm_Clock\Alarm_Clock\Form1.h(23,1): warning C4102: start: неиспользованная метка
+C:\Users\MrAndred\source\repos\CourseProject_AlarmClock\Alarm_Clock\Alarm_Clock\Form1.h(34,4): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+C:\Users\MrAndred\source\repos\CourseProject_AlarmClock\Alarm_Clock\Alarm_Clock\Form1.h(364,13): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   AssemblyInfo.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
-  Alarm_Clock.vcxproj -> D:\CourseProject_AlarmClock\Alarm_Clock\Debug\Alarm_Clock.exe
+  Alarm_Clock.vcxproj -> C:\Users\MrAndred\Source\Repos\CourseProject_AlarmClock\Alarm_Clock\Debug\Alarm_Clock.exe

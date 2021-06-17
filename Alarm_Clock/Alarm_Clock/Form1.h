@@ -42,7 +42,11 @@ namespace CppCLRWinformsProjekt {
 				simpleSound->Play();
 			}
 			MessageBox::Show("Время вышло", "Внимание", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			system("rundll32 powrprof.dll,SetSuspendState 0,1,0");
+			if (checkBox1->Checked == true)
+			{
+				system("rundll32 powrprof.dll,SetSuspendState 0,1,0");
+			}
+			
 			
 		}
 	protected:
@@ -80,6 +84,7 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Timer^ timer1;
+	private: System::Windows::Forms::CheckBox^ checkBox1;
 	private: System::ComponentModel::IContainer^ components;
 
 
@@ -118,6 +123,7 @@ namespace CppCLRWinformsProjekt {
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
 			// 
 			// comboBox1
@@ -129,7 +135,7 @@ namespace CppCLRWinformsProjekt {
 					L"27", L"28", L"29", L"30", L"31", L"32", L"33", L"34", L"35", L"36", L"37", L"38", L"39", L"40", L"41", L"42", L"43", L"44",
 					L"45", L"46", L"47", L"48", L"49", L"50", L"51", L"52", L"53", L"54", L"55", L"56", L"57", L"58", L"59"
 			});
-			this->comboBox1->Location = System::Drawing::Point(158, 173);
+			this->comboBox1->Location = System::Drawing::Point(94, 169);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(50, 21);
 			this->comboBox1->TabIndex = 1;
@@ -141,7 +147,7 @@ namespace CppCLRWinformsProjekt {
 				L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7",
 					L"8", L"9", L"10", L"11", L"12", L"13", L"14", L"15", L"16", L"17", L"18", L"19", L"20", L"21", L"22", L"23"
 			});
-			this->comboBox2->Location = System::Drawing::Point(101, 173);
+			this->comboBox2->Location = System::Drawing::Point(37, 169);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(50, 21);
 			this->comboBox2->TabIndex = 2;
@@ -191,7 +197,7 @@ namespace CppCLRWinformsProjekt {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(77, 127);
+			this->label1->Location = System::Drawing::Point(52, 128);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(100, 13);
 			this->label1->TabIndex = 8;
@@ -199,7 +205,7 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(80, 213);
+			this->button4->Location = System::Drawing::Point(16, 209);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(161, 23);
 			this->button4->TabIndex = 11;
@@ -210,7 +216,7 @@ namespace CppCLRWinformsProjekt {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(162, 157);
+			this->label2->Location = System::Drawing::Point(98, 153);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(46, 13);
 			this->label2->TabIndex = 12;
@@ -219,7 +225,7 @@ namespace CppCLRWinformsProjekt {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(114, 157);
+			this->label3->Location = System::Drawing::Point(50, 153);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(35, 13);
 			this->label3->TabIndex = 13;
@@ -227,7 +233,7 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(101, 243);
+			this->button5->Location = System::Drawing::Point(37, 239);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(107, 23);
 			this->button5->TabIndex = 16;
@@ -247,11 +253,22 @@ namespace CppCLRWinformsProjekt {
 			// 
 			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(158, 169);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(143, 17);
+			this->checkBox1->TabIndex = 20;
+			this->checkBox1->Text = L"Выключить компьютер";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(306, 330);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->label3);
